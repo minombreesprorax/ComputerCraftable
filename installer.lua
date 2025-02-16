@@ -4,11 +4,15 @@ local binPath = "/"
 -- Function to fetch directory listing (requires a raw file list from GitHub)
 local function fetchFileList()
     local url = repo .. "/bin/filelist.txt" -- You need to generate this file manually
+    print("Fetching filelist...")
     local response = http.get(url)
 
     if response then
         local content = response.readAll()
         response.close()
+
+        print("recieved content!")
+        print(content)
 
         local files = {}
         for line in content:gmatch("[^\r\n]+") do
@@ -26,16 +30,22 @@ local function downloadFile(file)
     local url = repo .. "/bin/" .. file
     local filePath = binPath .. file
 
+    print("Attempting to download "..url.." to "..filePath)
+
     -- Ensure directory structure exists
     local folder = filePath:match("(.*/)")
     if folder and not fs.exists(folder) then
         fs.makeDir(folder)
+        print("made folder".. folder)
     end
 
+    print("Recieving file...")
     local response = http.get(url)
     if response then
         local content = response.readAll()
         response.close()
+
+        print("Got file!")
 
         local fileHandle = fs.open(filePath, "w")
         fileHandle.write(content)
