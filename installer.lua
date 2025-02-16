@@ -1,4 +1,4 @@
-local repo = "https://raw.githubusercontent.com/minombreesprorax/ComputerCraftable/main" -- Replace with your actual GitHub repo URL
+local repo = "https://raw.githubusercontent.com/minombreesprorax/ComputerCraftable/Test"
 local binPath = "/"
 
 -- Function to fetch directory listing (requires a raw file list from GitHub)
