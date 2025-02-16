@@ -41,9 +41,9 @@ local function downloadFile(file)
         fileHandle.write(content)
         fileHandle.close()
 
-        print("Downloaded: " .. file)
+        print(url .. " downloaded to " .. filePath)
     else
-        print("Failed to download: " .. file)
+        print("couldn't download " .. url)
     end
 end
 
@@ -53,7 +53,10 @@ if files then
     for _, file in ipairs(files) do
         downloadFile(file)
     end
-    print("Installation complete!")
+    print("Installation complete! Rebooting in 3 seconds...")
+    sleep(3)
+    ---@diagnostic disable-next-line: undefined-field
+    os.reboot()
 else
     print("Installation failed: No files retrieved.")
 end
